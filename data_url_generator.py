@@ -27,7 +27,7 @@ for i in range(len(htmlFile)):
 
 htmlFile = htmlFile.replace('\n','').replace('    ','').replace('\t','') # remove newlines and indentation (probably breaks something if you have more than 3 spaces in a string or something, but I dont so I dont care)
 
-dataUrl = urllib.parse.quote(htmlFile, safe="()-+=[]{}/")
+dataUrl = urllib.parse.quote(htmlFile, safe="()[]{}<>=+-_/")
 dataUrl = 'data:text/html,' + dataUrl
 with open('app.txt','w') as f:
     f.write(dataUrl)
