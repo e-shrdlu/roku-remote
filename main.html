@@ -42,7 +42,7 @@
         </style>
         <script>
             function sendToRoku(suffix) {
-                fetch(`http://${(document.getElementsByName('IP')[0].value}:8060/${suffix}`,{method:'POST'});
+                fetch(`http://${document.getElementsByName('IP')[0].value}:8060/${suffix}`,{method:'POST'});
             }
             function buttonPress(button) {
                 sendToRoku(`keypress/${button}`);
