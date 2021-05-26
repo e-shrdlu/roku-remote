@@ -1,0 +1,131 @@
+<html>
+    <body>
+        <style>
+            button {
+                margin: 0 auto;
+                display:inline-block;
+                width: 100px;
+            }
+            div {
+                text-align: center;
+            }
+            @media  (prefers-color-scheme: dark) {
+                body {
+                    color:#bbbbbb;
+                    background-color:#121212;
+                }
+                button {
+                    color:#bbbbbb;
+                    background-color: #303040;
+                    border-color: #4d256c;
+
+                }
+                input {
+                    color:#bbbbbb;
+                    background-color:303040;
+                    border-color: #4d256c;
+                }
+            }
+        </style>
+        <script>
+            const ip = '192.168.50.152';/* change this */
+            function sendToRoku(suffix) {
+                fetch(`http://${ip}:8060/${suffix}`,{method:'POST'});
+            }
+            function buttonPress(button) {
+                sendToRoku(`keypress/${button}`);
+            }
+            function letterPress(letter) {
+                sendToRoku(`keypress/lit_${letter}`);
+            }
+            function launchApp(id) {
+                sendToRoku(`launch/${id}`)
+            }
+            function typeText(text) {
+                for (let i = 0; i < text.length; i++) {
+                    setTimeout(function(){ sendToRoku(`keypress/lit_${encodeURIComponent(text[i])}`); }, 100*i);
+                }
+            }
+        </script>
+        <div>
+            <button onclick="buttonPress('Back')">Back<hr/></button>
+            <button onclick="buttonPress('Home')">Home<hr/></button>
+        </div>
+        <br/>
+        <div>
+            <button onclick="buttonPress('Up')">Up<hr/></button><br/>
+        </div>
+        <div>
+            <button onclick="buttonPress('Left')">Left<hr/></button>
+            <button onclick="buttonPress('Select')">Select<hr/></button>
+            <button onclick="buttonPress('Right')">Right<hr/></button>
+        </div>
+        <div>
+            <button onclick="buttonPress('Down')">Down<hr/></button>
+        </div>
+        <br/>
+        <div>
+            <button onclick="buttonPress('Rev')">Rewind<hr/></button>
+            <button onclick="buttonPress('Play')">Play/Pause<hr/></button>
+            <button onclick="buttonPress('Fwd')">FastForward<hr/></button><br/>
+        </div>
+        <br/>
+        <div>
+            <button onclick="launchApp('12')">open<br/>netflix</button>
+            <button onclick="launchApp('13')">open<br/>amazon</button>
+        </div>
+        <div>
+            <button onclick="launchApp('2285')">open<br/>hulu</button>
+            <button onclick="launchApp('291097')">open<br/>disney+</button>
+        </div>
+
+        <br/>
+        <hr/>
+        <br/>
+
+        <div>
+            <button onclick="buttonPress('Search')">Search<hr/></button>
+            <button onclick="buttonPress('Info')">Info<hr/></button>
+            <br/>
+            <button onclick="buttonPress('Backspace')">Backspace<hr/></button>
+            <button onclick="buttonPress('Enter')">Enter<hr/></button>
+        </div>
+
+        <br/>
+        <br/>
+        <hr/>
+        <br/>
+        <br/>
+
+        <div>
+            <a>app ID: </a>
+            <input type="text" name="appID"/>
+            <button onclick="launchApp(document.getElementsByName('appID')[0].value)">open<br/>custom</button>
+        </div>
+        <br/>
+        <br/>
+        <div>
+            <a>text: </a>
+            <input type="text" name="textToType"/>
+            <button onclick="typeText(document.getElementsByName('textToType')[0].value)">type<br/>text</button>
+        </div>
+        <br/>
+        <br/>
+        <div>
+            <a>custom keypress (ex "keypress/home"): </a>
+            <input type="text" name="customKeypress"/>
+            <button onclick="sendToRoku(document.getElementsByName('customKeypress')[0].value)">press<br/>key</button>
+            <br/>
+            <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md#keypress-key-values">buttons you can push</a>
+        </div>
+
+        <br/>
+        <br/>
+        <hr/>
+        <br/>
+        <br/>
+
+        <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md">official roku documention</a>
+
+    </body>
+</html>
