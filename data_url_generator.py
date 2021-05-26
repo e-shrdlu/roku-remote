@@ -29,12 +29,13 @@ htmlFile = htmlFile.replace('\n','').replace('    ','').replace('\t','') # remov
 
 dataUrl = urllib.parse.quote(htmlFile, safe="()-+=[]{}/")
 dataUrl = 'data:text/html,' + dataUrl
-
-base64DataUrl = base64.b64encode(htmlFile.encode()).decode()
-base64DataUrl = 'data:text/html;base64,'+base64DataUrl
-
 with open('app.txt','w') as f:
     f.write(dataUrl)
 
+# removed because only 91 characters were being saved
+"""
+base64DataUrl = base64.b64encode(htmlFile.encode()).decode()
+base64DataUrl = 'data:text/html;base64,'+base64DataUrl
 with open('base64.txt','w') as f:
     f.write(base64DataUrl)
+"""
