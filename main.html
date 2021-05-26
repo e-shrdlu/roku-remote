@@ -41,9 +41,8 @@
                 }
         </style>
         <script>
-            const ip = '192.168.50.152';/* change this */
             function sendToRoku(suffix) {
-                fetch(`http://${ip}:8060/${suffix}`,{method:'POST'});
+                fetch(`http://${(document.getElementsByName('IP')[0].value}:8060/${suffix}`,{method:'POST'});
             }
             function buttonPress(button) {
                 sendToRoku(`keypress/${button}`);
@@ -138,7 +137,12 @@
         <br/>
         <br/>
 
-        <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md">official roku documention</a>
+        <div style="text-allign:left;">
+            <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md">official roku documention</a>
+        </div>
+        <div style="text-allign:right;">
+            <a>IP: </a><input type="text" name="IP" value="192.168.50.152"/>
+        </div>
 
     </body>
 </html>
