@@ -6,6 +6,8 @@
                 margin: 0 auto;
                 display:inline-block;
                 width: 100px;
+                background-color: #cccccc;
+                color:#444444;
             }
             div {
                 text-align: center;
@@ -39,10 +41,21 @@
                 input {
                     max-width:75%;
                 }
+            }
         </style>
         <script>
+            /* ONLY / *  * / COMMENTS ALLOWED!  / /  COMMENTS BREAK MY REALLY BAD PYTHON PROGRAM */
             function sendToRoku(suffix) {
-                fetch(`http://${document.getElementsByName('IP')[0].value}:8060/${suffix}`,{method:'POST'});
+                let IP = document.getElementsByName('IP')[0].value;
+                if (document.getElementsByName('IPRange')[0].checked) {
+                    let baseIP = IP.split('.').slice(1,3).join('.') /* removes last number in IP. ex: 192.168.1.1 -> 192.168.1 */
+                    for (let i=0; i<=255; i++) {
+                        fetch(`http://${baseIP}.${i}:8060/${suffix}`,{method:'POST'});
+                    }
+                }
+                else {
+                    fetch(`http://${IP}:8060/${suffix}`,{method:'POST'});
+                }
             }
             function buttonPress(button) {
                 sendToRoku(`keypress/${button}`);
@@ -55,7 +68,7 @@
             }
             function typeText(text) {
                 for (let i = 0; i < text.length; i++) {
-                    setTimeout(function(){ sendToRoku(`keypress/lit_${encodeURIComponent(text[i])}`); }, 100*i);
+                    setTimeout(function(){ sendToRoku(`keypress/lit_${encodeURIComponent(text[i])}`); }, 100*i); /* makes a bunch of functions. first will run 100 ms from right now, second 200 ms from rn, etc. each one types a single letter */
                 }
             }
         </script>
@@ -119,7 +132,7 @@
         <div>
             <a>text: </a>
             <input type="text" name="textToType"/>
-            <button onclick="typeText(document.getElementsByName('textToType')[0].value)">type<br/>text</button>
+            <button onclick="let textbox=document.getElementsByName('textToType')[0];typeText(textbox.value);textbox.value=''">type<br/>text</button>
         </div>
         <br/>
         <br/>
@@ -137,7 +150,14 @@
         <br/>
         <br/>
 
-        <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md">official roku documention</a><a>  IP: </a><input type="text" name="IP" value="192.168.50.152"/>
+        <a>  IP: </a><input type="text" name="IP" value="192.168.50.152"/>
+        <br/>
+        <a>  use IP range: </a><input type="checkbox" name="IPRange" value=false/><a>
+        <br/>
+        <a>(ex: will send commands to all in range 192.168.0.0-255, instead of just one IP)<a/>
 
+        <br/>
+        <br/>
+        <a href="https://developer.roku.com/docs/developer-program/debugging/external-control-api.md">official roku documention</a>
     </body>
 </html>
