@@ -48,7 +48,7 @@
             function sendToRoku(suffix) {
                 let IP = document.getElementsByName('IP')[0].value;
                 if (document.getElementsByName('IPRange')[0].checked) {
-                    let baseIP = IP.split('.').slice(1,3).join('.') /* removes last number in IP. ex: 192.168.1.1 -> 192.168.1 */
+                    let baseIP = IP.split('.').slice(0,3).join('.'); /* removes last number in IP. ex: 192.168.1.1 -> 192.168.1 */
                     for (let i=0; i<=255; i++) {
                         fetch(`http://${baseIP}.${i}:8060/${suffix}`,{method:'POST'});
                     }

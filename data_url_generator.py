@@ -13,7 +13,7 @@ for i in range(len(htmlFile)):
         if htmlFile[i:i+2]=='*/':
             htmlFile = htmlFile[:comment_start] + htmlFile[i+2:] # htmlfile = htmlfile before comment + htmlfile after comment
             comment_start = None
-
+print('+' in htmlFile, 0)
 # remove // comments
 # disabled because it also broke urls (removed everything after "http://")
 """for i in range(len(htmlFile)):
@@ -27,8 +27,11 @@ for i in range(len(htmlFile)):
 
 htmlFile = htmlFile.replace('\n','').replace('    ','').replace('\t','') # remove newlines and indentation (probably breaks something if you have more than 3 spaces in a string or something, but I dont so I dont care)
 
-dataUrl = urllib.parse.quote(htmlFile, safe="()[]{}<>=+-_/'\"\\;:.,`")
+print('+' in htmlFile, 1)
+
+dataUrl = urllib.parse.quote(htmlFile, safe="()[]{}<>=-_/'\"\\;:.,`")
 dataUrl = 'data:text/html,' + dataUrl
+print('+' in htmlFile, '+' in dataUrl, 2)
 with open('app.txt','w') as f:
     f.write(dataUrl)
 
