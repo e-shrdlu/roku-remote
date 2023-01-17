@@ -1,4 +1,4 @@
-# roku remote for mobile
+# roku remote
 This is an "app" that allows you to control your roku from your phone!
 (yeah I know, theres already an app for that)
 
