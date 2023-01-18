@@ -12,8 +12,9 @@ this will check for any device in the range 192.168.0.0--192.168.1.255 (may need
 ## Why does this exist?
 That's a fantastic question. Some projects exist to accomplish some functional purpose, or to make daily interactions with technology more convenient. This is neither. All Rokus ship with a remote, and even if you insist on using your phone or computer instead, there are far better apps than this.\
 No, this project exists for another purpose: Simply to see if I could. I discovered Roku's API and wanted to see if I could get something to work on my iphone.\
-The iphone, at least as far as I knew at the time, didn't allow for a way to execute commands like those required to make the POST requests. I could write an html document that would run JavaScript to do what I wanted, but I didn't believe there would be a way to open it on an iphone without hosting it somewhere. Finally, when I stumbled across the idea of a data URI, I realized I could abuse them to open my html file straight inside my web browser.\
-I almost gave up hope, because like any good script kiddie, I had about 5 browsers on my phone at the time, and all the ones I used didn't handle top level data URIs, but fourtunatly the built in safari browser worked.
+The iphone, at least as far as I knew at the time, didn't allow for a way to execute commands like those required to make the POST requests for the Roku. I could write an html document that would run JavaScript to do what I wanted, but I didn't believe there would be a way to open it on an iphone without hosting it somewhere. Finally, when I stumbled across the idea of a data URI, I realized I could abuse them to open my html file straight inside my web browser.\
+I almost gave up hope, because like any good script kiddie, I had about 5 browsers on my phone at the time, and all the ones I used didn't handle top level data URIs, but fourtunatly the built in safari browser worked.\
+And the rest is history
 
 ## how does it work?
 A data URI is a way of encoding something that would normally be loaded via url directly into an html page.\
